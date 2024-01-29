@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registraion</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">    <style>
+        form {
+            margin:50px;
+            width: 300px;
+            display: inline-block;
+        }
+        h2{
+            margin-bottom: 20px;
+        }
+        p{
+            margin-top: 20px;
+            margin-bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <form id ="reg" action="/register" method="POST">
+        {% csrf_token %}
+        <h2>Registration</h2>
+        <p>First Name</p>
+        <input type="text" name="register_fname">
+        <p>Last Name</p>
+        <input type="text" name="register_lname">
+        <p>Email</p>
+        <input type="text" name="register_email">
+        <p>Password</p>
+        <input type="password" name="register_pwd">
+        <p><input type="submit" value="Register"></p>
+        {% if messages %}
+        <!-- Message based code will come here  -->
+        <ul id="messages">
+            {% for message in messages %}
+            <li>{{ messages }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </form>
+    <form id="log" action="/login" method="POST">
+        {% csrf_token %}
+        <h2>Login</h2>
+        <p>Email</p>
+        <input type="text" name="log-email" required>
+        <p>password</p>
+        <input type="password" name="log-pwd" required>
+        <p><input type="submit" value="Log In"></p>
+    </form>
+</body>
+</html>

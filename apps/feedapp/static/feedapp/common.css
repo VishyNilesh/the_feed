@@ -1,0 +1,65 @@
+body{
+    padding:30px;
+}
+#header{
+    height: 50px;
+    width: 900px;
+    padding:10px;
+    border : 2px solid black;
+}
+#header h4, #header p,#header a{
+    display: inline-block;
+    vertical-align: top;
+} 
+#header h4{
+    margin-right: 175px;
+}
+#header p{
+    margin-right: 45px;
+}
+#content{
+    min-height: 500px;
+    width: 900px;
+    padding:10px;
+    border : 2px solid black;
+    padding: 25px 75px;
+}
+.msgHead{
+    font-weight: bold;
+    font-size: small;
+}
+.msgBody{
+    margin-left: 15px;
+}
+.cmntHead{
+    font-weight: bold;
+    font-size: small;
+    margin-left: 15px;
+}
+.cmntBody{
+    margin-left: 15px;
+        }
+#msgText{
+    height: 75px;
+    width: 750px;
+    resize: none;
+}
+#msgBtn, .cmntBtn{
+    height: 35px;
+    width: 150px;
+    margin-left: 590px;
+    margin-bottom: 20px;
+    background-color: blue;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+#cmntHead{
+    margin-left: 15px;
+}
+.cmntText{
+    height: 75px;
+    width: 750px;
+    margin-left: 15px;
+    resize: none;
+}

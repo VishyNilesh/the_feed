@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedapp</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'feedapp/common.css' %}">
+</head>
+<body>
+    <div id="header">
+        <h4>Facebook News Feed</h4>
+        <p>Welcome {{request.session.user_fname}}</p>
+        <a href="/logout">Log Out</a>
+    </div>
+    <div id="content">
+        <form action="/post_message" method="POST">
+            {% csrf_token %}
+            <h6>Post a message</h6>
+            <textarea name="msgText" id="msgText" cols="30" rows="10"></textarea>
+            <input type="submit" id = "msgBtn" value="Post a message">
+        </form>
+        {% for msg in all_msgs %}
+                <p class="msgHead"><a href="/user_posts/{{ msg.user.id }}">{{ msg.user.first_name }} {{ msg.user.last_name }}</a> - {{ msg.created_at|date:"F jS Y" }} {% if msg.user.id == request.session.user_id %} | <a href="/delete/{{msg.id}}">Delete</a>{% endif %} | <a href="/like_msg/{{msg.id}}">LIKE</a> | Likes: {{ msg.like.count }}</p>
+                <p class="msgBody">{{ msg.message }}</p>
+                {% for cmnt in msg.comments.all %}
+                        <p class="cmntHead"><a href="/user_posts/{{ cmnt.user.id }}">{{ cmnt.user.first_name }} {{ cmnt.user.last_name }}</a> - {{ cmnt.created_at|date:"F jS Y" }} | <a href="/like_cmnt/{{cmnt.id}}">LIKE</a> | Likes: {{ cmnt.like.count }}</p>
+                        <p class="cmntBody">{{ cmnt.comment }}</p>
+                {% endfor %}
+                <form action="/post_comment/{{msg.id}}" method="POST">
+                    {% csrf_token %}
+                    <h6 id="cmntHead">Post a Comment</h6>
+                    <textarea class="cmntText" name="cmntText"></textarea>
+                    <input class="cmntBtn" type="submit" value="Post a comment">
+                </form>
+            {% endfor %}
+    </div>
+</body>
+</html>
